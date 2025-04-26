@@ -8,7 +8,7 @@
   <!-- Open Graph / Thumbnail -->
   <meta property="og:title" content="Perreo Equis">
   <meta property="og:description" content="No te preocupes, pronto tendrás más novedades sobre cómo tener el mejor perreo de tu vida.">
-  <meta property="og:image" content="https://www.perreoequis.com/thumbnail.jpg">
+  <meta property="og:image" content="https://www.perreoequis.com/assets/thumbnail.jpg">
   <meta property="og:url" content="https://www.perreoequis.com">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -97,11 +97,10 @@
     document.addEventListener("DOMContentLoaded", function() {
       var button = document.querySelector('.spotify-button');
       if (button) {
-        // Só activa animação se estivermos em mobile
         if (window.innerWidth <= 768) {
           setTimeout(function() {
             button.classList.add('show');
-          }, 500); // atraso de meio segundo para suavizar
+          }, 500); // 0.5 segundos de atraso
         }
       }
     });
