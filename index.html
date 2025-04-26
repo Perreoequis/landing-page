@@ -17,7 +17,9 @@
       margin: 0;
       padding: 0;
       height: 100%;
+      width: 100%;
       font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
 
     .hero {
@@ -26,23 +28,54 @@
       background-position: center;
       background-repeat: no-repeat;
       height: 100vh;
+      width: 100%;
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
       flex-direction: column;
-      color: white;
-      text-align: center;
-      padding: 20px;
       position: relative;
     }
 
-    footer {
+    /* Spotify widget (desktop) */
+    .spotify-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      height: 80px;
+      z-index: 1000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: block;
+    }
+
+    /* Spotify button (mobile) */
+    .spotify-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1DB954;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 1em;
       font-weight: bold;
-      font-size: 1.5em;
-      color: rgba(255, 255, 255, 0.95);
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-      margin-bottom: 20px;
-      padding: 0 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 1000;
+      display: none;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    /* Animação: quando a página carrega */
+    .spotify-button.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @media (max-width: 768px) {
@@ -50,19 +83,52 @@
         background-image: url('imagem-mobile.jpg');
       }
 
-      footer {
-        font-size: 1.2em;
+      .spotify-widget {
+        display: none;
+      }
+
+      .spotify-button {
+        display: inline-block;
       }
     }
   </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var button = document.querySelector('.spotify-button');
+      if (button) {
+        // Só activa animação se estivermos em mobile
+        if (window.innerWidth <= 768) {
+          setTimeout(function() {
+            button.classList.add('show');
+          }, 500); // atraso de meio segundo para suavizar
+        }
+      }
+    });
+  </script>
+
 </head>
 <body>
 
 <div class="hero">
-  <footer>
-    No te preocupes, pronto tendrás más novedades sobre cómo tener el mejor perreo de tu vida.
-  </footer>
+  <!-- Hero vazio: apenas imagem de fundo -->
 </div>
+
+<!-- Spotify Widget (apenas no desktop) -->
+<div class="spotify-widget">
+  <iframe style="border:0; width:100%; height:100%;" 
+          src="https://open.spotify.com/embed/playlist/4ebG6G91GhaotRUwUzKY0j?utm_source=generator" 
+          frameborder="0" 
+          allowfullscreen="" 
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+          loading="lazy">
+  </iframe>
+</div>
+
+<!-- Spotify Button (apenas no mobile) -->
+<a class="spotify-button" href="https://open.spotify.com/playlist/4ebG6G91GhaotRUwUzKY0j" target="_blank">
+  🎵 Ouvir Playlist
+</a>
 
 </body>
 </html>
